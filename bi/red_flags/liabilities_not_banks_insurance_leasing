@@ -96,7 +96,7 @@ del len_banks_names, i
 
 # Read the whole list of declarations (this is just for the test)
 
-decl_list = pd.read_csv("E:/personal/declarations/declarations_for_bi.csv", sep = ",", encoding = "utf8")
+decl_list = pd.read_csv("declarations_for_bi.csv", sep = ",", encoding = "utf8")
 
 # Filter only those who have liabilities and keep only their ids (this is just for the test)
 
@@ -208,4 +208,4 @@ for d_i in range(1000):
             
 
     
-# d.to_csv("E:/personal/declarations/liabilities_flag.csv", sep = "|", encoding = "utf8")    
+# d.to_csv("liabilities_flag.csv", sep = "|", encoding = "utf8")    
