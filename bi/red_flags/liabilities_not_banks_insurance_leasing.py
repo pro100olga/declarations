@@ -205,3 +205,5 @@ for d_i in range(1000):
                                               'object_type':  [r['declaration']["unified_source"]["step_13"][i]["objectType"] if "objectType" in r['declaration']["unified_source"]["step_13"][i].keys() else ''],
                                               'object_other': [r['declaration']["unified_source"]["step_13"][i]["otherObjectType"] if "objectType" in r['declaration']["unified_source"]["step_13"][i].keys() else ''],
                                               'reason': [reason]}))
+
+            
