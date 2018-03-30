@@ -24,3 +24,6 @@ for page in range(2, r["results"]["paginator"]["num_pages"] + 1):
 print("Declarations exported %s" % len(data))
 with open("feed18.json", "w") as fp:
     json.dump(data, fp)
+
+# To further parse this data, look here (code in R!): 
+# https://github.com/pro100olga/declarations/blob/master/getting_data/process_data_from_formy_zmin.R
