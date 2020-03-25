@@ -84,11 +84,11 @@ def flag_has_huge_prize(decl, ans):
             elif decl['data']['step_11'][k]['objectType'] == "Інше":
                 
                 if bool(re.search(string = decl['data']['step_11'][k]['otherObjectType'].lower(), 
-                                  pattern = "приз|вигр|выигр|лотер")):
+                                  pattern = "приз|вигра|выигр|лотере")):
                     
                     prize_amount = prize_amount + str_to_float(s = decl['data']['step_11'][k]['sizeIncome'])
              
-    if prize_amount > 10000.0:
+    if prize_amount >= 10000.0:
         flag = True        
     
     return flag == ans
@@ -125,12 +125,14 @@ def flag_has_major_real_estate(decl, ans):
         
         for k in decl['data']['step_3'].keys():
             
-            if len(decl['data']['step_3'][k]['totalArea']) > 0:
+            if decl['data']['step_3'][k]['objectType'] not in ["Земельна ділянка", "Інше"]:
             
-                if ((str_to_float(s = decl['data']['step_3'][k]['totalArea']) > 300) & (decl['data']['step_3'][k]['objectType'] not in ["Земельна ділянка"])):
-                    
-                    flag = True
-                    break
+                if len(decl['data']['step_3'][k]['totalArea']) > 0:
+                
+                    if ((str_to_float(s = decl['data']['step_3'][k]['totalArea']) > 300) & (decl['data']['step_3'][k]['objectType'] not in ["Земельна ділянка"])):
+                        
+                        flag = True
+                        break
             
     return flag == ans   
 
@@ -145,7 +147,7 @@ def flag_has_foreign_real_estate(decl, ans):
         
         for k in decl['data']['step_3'].keys():
             
-            if decl['data']['step_3'][k]['country'] != "1":
+            if decl['data']['step_3'][k]['country'] not in  ["1", ""]:
                 
                 flag = True
                 break
@@ -163,7 +165,7 @@ def flag_has_bo_abroad(decl, ans):
         
         for k in decl['data']['step_9'].keys():
             
-            if decl['data']['step_9'][k]['country'] != "1":
+            if decl['data']['step_9'][k]['country'] not in ["1", ""]:
                 
                 flag = True
                 break
@@ -180,10 +182,14 @@ def flag_has_non_bank_liabilities(decl, ans):
     # Load file - created by code from here 
     # https://github.com/pro100olga/declarations/blob/master/bi/red_flags/liabilities_not_banks_insurance_leasing.py
     
-    banks_edrpou = pd.read_csv("C:\\Users\\olga.makarova\\Downloads\\declarations\\banks_edrpou.csv")
+    banks_edrpou = pd.read_csv("banks_edrpou.csv")
     banks_edrpou = set(banks_edrpou['banks_edrpou'])
     
-    banks_names = set(["твбв", "ощадбанк", "приватбанк", "аваль", "райффайзен", "абанк", "агріколь", "укрсиббанк", "альфабанк", "пумб", "укргазбанк", "мегабанк", "акордбанк", "сбербанк", "таскомбанк", "кредобанк", "індустріалбанк", "укрексімбанк", "радабанк", "укркомунбанк", "укрбудінвестбанк", "правексбанк", "правекс", "прокредит", "метабанк", "комінвестбанк", "форвард"])
+    banks_names = set(["твбв", "ощадбанк", "приватбанк", "аваль", "райффайзен", "абанк", "агріколь", 
+                       "укрсиббанк", "альфабанк", "пумб", "укргазбанк", "мегабанк", "акордбанк", "сбербанк", 
+                       "таскомбанк", "кредобанк", "індустріалбанк", "укрексімбанк", "радабанк", "укркомунбанк",
+                       "укрбудінвестбанк", "правексбанк", "правекс", "прокредит", "метабанк", "комінвестбанк", 
+                       "форвард"])
     
     flag = False
             
